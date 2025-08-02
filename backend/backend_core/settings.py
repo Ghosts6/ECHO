@@ -154,6 +154,15 @@ else:
         )
     }
 
+import sys
+if 'test' in sys.argv or 'pytest' in sys.modules:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
+    }
+
 # Testrunner
 if IS_TESTING:
     TEST_RUNNER = "pytest_django.runner.DiscoverRunner"
@@ -200,6 +209,9 @@ LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
+
+# Custom User Model
+AUTH_USER_MODEL = 'core.User'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
