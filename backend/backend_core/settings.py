@@ -10,6 +10,38 @@ import sys
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 
+# URL & WSGI
+ROOT_URLCONF = "backend_core.urls"
+WSGI_APPLICATION = "backend_core.wsgi.application"
+
+# Templates (for serving React index.html)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [str(BASE_DIR / '..' / 'frontend' / 'dist')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+import os
+import logging
+import dj_database_url
+from logging.handlers import RotatingFileHandler
+from dotenv import load_dotenv
+from pathlib import Path
+import sys
+
+# Base directory & dotenv setup
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
+
 # ENV VARS
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() == "true"
