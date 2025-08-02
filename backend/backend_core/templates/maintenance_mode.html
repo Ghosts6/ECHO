@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Mode - Healthcare AI Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/maintenance_mode.css' %}">
+</head>
+<body class="relative">
+    <div class="particles" id="particles"></div>
+    
+    <div class="container mx-auto px-4 py-12 flex flex-col items-center justify-center min-h-screen">
+        <div class="max-w-3xl w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-500 to-teal-400 p-6 text-white text-center">
+                <svg class="w-16 h-16 mx-auto mb-4 float" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                </svg>
+                <h1 class="text-3xl font-bold mb-2">We're Upgrading Our Systems</h1>
+                <p class="text-lg opacity-90">Our AI doctor assistant is getting even smarter</p>
+            </div>
+            
+            <div class="p-8">
+                <div class="flex items-center justify-center mb-8">
+                    <div class="relative w-48 h-48 float">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-full h-full text-blue-500">
+                            <circle cx="12" cy="12" r="10" fill="#EBF5FF" stroke="#3B82F6" stroke-width="1.5"></circle>
+                            <path d="M12 6v6l4 2" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"></path>
+                            <path fill="#3B82F6" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="pulse">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">We'll be back shortly</h2>
+                    <p class="text-gray-600 mb-6">Our team is working hard to improve your healthcare AI assistant experience. We're implementing new features and enhancing our systems to better serve you.</p>
+                    
+                    <div class="progress-bar mb-2">
+                        <div class="progress-fill" id="progressBar"></div>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-blue-50 p-4 rounded-lg text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-3 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 11.24V7.5a2.5 2.5 0 0 1 5 0v3.74"></path>
+                            <path d="M5 10v4a7 7 0 0 0 14 0v-4"></path>
+                            <line x1="8" y1="18" x2="16" y2="18"></line>
+                        </svg>
+                        <h3 class="font-medium text-gray-800">Enhanced AI</h3>
+                        <p class="text-sm text-gray-600">Upgrading our AI models for better diagnostics</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-3 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <h3 class="font-medium text-gray-800">Security Updates</h3>
+                        <p class="text-sm text-gray-600">Implementing advanced security protocols</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-3 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                        </svg>
+                        <h3 class="font-medium text-gray-800">Performance Boost</h3>
+                        <p class="text-sm text-gray-600">Optimizing for faster response times</p>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-200 pt-6">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Want to know when we're back?</h3>
+                    
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <input type="email" id="notifyEmail" placeholder="Enter your email" class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button id="notifyButton" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg transition-colors">Notify Me</button>
+                    </div>
+                    
+                    <div id="notification" class="mt-4 p-4 rounded-lg bg-green-50 text-green-700 notification">
+                        Thank you! We'll notify you when we're back online.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 p-6 text-center">
+                <p class="text-gray-600">For urgent matters, please contact us at:</p>
+                <p class="text-blue-600 font-medium">support@echo.com</p>
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/maintenance_mode.js' %}"></script>
+</body>
+</html>

@@ -15,6 +15,9 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() == "true"
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "").split(",")
 
+# Maintenance mode flag
+MAINTENANCE_MODE = os.getenv("MAINTENANCE_MODE", "False").lower() == "true"
+
 # External Services
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 TEST_MODE = os.getenv("TEST_MODE", "False").lower() == "true"
@@ -63,6 +66,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "backend_core.middleware.MaintenanceModeMiddleware",
 ]
 
 # URL & WSGI
@@ -76,6 +80,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '..', 'frontend', 'dist'),
+    os.path.join(BASE_DIR, 'backend_core', 'Static'),
 ]
 
 
@@ -121,6 +126,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             os.path.join(BASE_DIR, '..', 'frontend', 'dist'),
+            os.path.join(BASE_DIR, 'backend_core', 'templates'),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
