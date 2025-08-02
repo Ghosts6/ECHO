@@ -14,11 +14,13 @@ load_dotenv(BASE_DIR / ".env")
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() == "true"
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "").split(",")
-IS_TESTING = os.getenv("TEST_MODE", "False") == "True"
 
 # External Services
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 TEST_MODE = os.getenv("TEST_MODE", "False").lower() == "true"
+
+# Use TEST_MODE for all test logic
+IS_TESTING = TEST_MODE
 
 # CROSS config
 CORS_ALLOWED_ORIGINS = [
@@ -136,8 +138,9 @@ TEMPLATES = [
     },
 ]
 
+
 # DATABASE
-if IS_TESTING:
+if IS_TESTING or not os.environ.get("DATABASE_URL"):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",

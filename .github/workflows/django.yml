@@ -22,6 +22,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Set test DATABASE_URL and TEST_MODE
+      run: |
+        echo "DATABASE_URL=sqlite:///${{ github.workspace }}/backend/test_db.sqlite3" >> $GITHUB_ENV
+        echo "TEST_MODE=True" >> $GITHUB_ENV
     - name: Django makemigrations
       run: |
         cd backend
