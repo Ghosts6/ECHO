@@ -2,9 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import Logo from '../img/Logo.png';
 
-const Header = ({ isAuthenticated, onLogout }) => {
+
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("isAuthenticated"));
+
+  useEffect(() => {
+    const handleStorage = () => setIsAuthenticated(!!localStorage.getItem("isAuthenticated"));
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAuthenticated");
+    setIsAuthenticated(false);
+    window.location.replace("/");
+  };
 
   const activeClass = 'active';
   const inactiveClass = 'nav-link';
@@ -48,7 +62,7 @@ const Header = ({ isAuthenticated, onLogout }) => {
             {isAuthenticated ? (
               <>
                 <NavLink to="/account" className="nav-link">Account</NavLink>
-                <button onClick={onLogout} className="bg-accent text-primary font-bold py-2 px-4 rounded-lg border-2 border-transparent hover:bg-transparent hover:text-accent hover:border-accent transition-all duration-300">
+                <button onClick={handleLogout} className="bg-accent text-primary font-bold py-2 px-4 rounded-lg border-2 border-transparent hover:bg-transparent hover:text-accent hover:border-accent transition-all duration-300">
                   Logout
                 </button>
               </>
@@ -76,7 +90,7 @@ const Header = ({ isAuthenticated, onLogout }) => {
             {isAuthenticated ? (
               <>
                 <NavLink to="/account" className="nav-link" onClick={closeMenu}>Account</NavLink>
-                <button onClick={() => { onLogout(); closeMenu(); }} className="bg-accent text-primary font-bold py-2 px-4 rounded-lg border-2 border-transparent hover:bg-transparent hover:text-accent hover:border-accent transition-all duration-300">
+                <button onClick={() => { handleLogout(); closeMenu(); }} className="bg-accent text-primary font-bold py-2 px-4 rounded-lg border-2 border-transparent hover:bg-transparent hover:text-accent hover:border-accent transition-all duration-300">
                   Logout
                 </button>
               </>

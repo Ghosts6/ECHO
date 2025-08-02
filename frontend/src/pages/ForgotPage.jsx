@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -6,23 +7,32 @@ export default function ForgotPage() {
   const [email, setEmail] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [sent, setSent] = useState(false);
-  const [error, setError] = useState("");
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    setError("");
-    // Honeypot check for bots
-    if (honeypot) {
-      setError("Invalid request.");
+    if (honeypot) return;
+    // Email validation
+    const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    if (!emailRegex.test(email)) {
+      Swal.fire("Invalid Email", "Please enter a valid email address.", "error");
       return;
     }
-    // Basic email format validation
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-      setError("Please enter a valid email address.");
-      return;
+    try {
+      const res = await fetch("/api/auth/forgot/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, website: honeypot })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setSent(true);
+        Swal.fire("Success", "If your email exists in our database, a reset link has been sent.", "success");
+      } else {
+        Swal.fire("Error", "No account found with this email address.", "error");
+      }
+    } catch (err) {
+      Swal.fire("Error", "Network error. Please try again.", "error");
     }
-    // TODO: Connect to backend endpoint for password reset
-    setSent(true);
   };
 
   return (
@@ -61,7 +71,6 @@ export default function ForgotPage() {
                 tabIndex="-1"
                 autoComplete="off"
               />
-              {error && <p className="text-red-600 text-center text-sm mb-2">{error}</p>}
               <button className="w-full bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 text-white py-2 rounded font-bold shadow hover:scale-105 transition-transform" type="submit">Send Reset Link</button>
             </form>
           )}
