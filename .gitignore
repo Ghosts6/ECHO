@@ -8,6 +8,7 @@ venv/
 .env
 db.sqlite3
 staticfiles/
+backend/test_db.sqlite3
 
 # Django/React static build outputs
 backend_core/Static/frontend/static/
@@ -39,3 +40,12 @@ yarn-error.log*
 # Logs
 logs/
 *.log
+backend/test_db.sqlite3
+backend/backend_core/Static/frontend/static/js/main.b93d5d72.js.map
+backend/backend_core/Static/frontend/static/js/main.b93d5d72.js
+backend/backend_core/Static/frontend/static/js/main.166160d9.js.LICENSE.txt
+backend/backend_core/Static/frontend/index.html
+backend/backend_core/Static/frontend/static/css/main.7d771866.css
+backend/backend_core/Static/frontend/static/css/main.7d771866.css.map
+backend/backend_core/Static/frontend/static/css/main.a89cd125.css
+backend/backend_core/Static/frontend/static/css/main.a89cd125.css.map
