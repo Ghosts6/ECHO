@@ -10,38 +10,6 @@ import sys
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 
-# URL & WSGI
-ROOT_URLCONF = "backend_core.urls"
-WSGI_APPLICATION = "backend_core.wsgi.application"
-
-# Templates (for serving React index.html)
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(BASE_DIR / '..' / 'frontend' / 'dist')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-import os
-import logging
-import dj_database_url
-from logging.handlers import RotatingFileHandler
-from dotenv import load_dotenv
-from pathlib import Path
-import sys
-
-# Base directory & dotenv setup
-BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(BASE_DIR / ".env")
-
 # ENV VARS
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() == "true"
@@ -56,8 +24,6 @@ TEST_MODE = os.getenv("TEST_MODE", "False").lower() == "true"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -73,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
@@ -89,9 +56,9 @@ REST_FRAMEWORK = {
 
 # Middleware
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",  # for CORS support
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # for static file serving
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -107,17 +74,12 @@ WSGI_APPLICATION = "backend_core.wsgi.application"
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = "/static/"
-
-FRONTEND_DIST = BASE_DIR / '..' / 'frontend' / 'dist'
-BACKEND_STATIC = BASE_DIR / 'backend_core' / 'Static'
-
-STATICFILES_DIRS = []
-if FRONTEND_DIST.exists():
-    STATICFILES_DIRS.append(FRONTEND_DIST)
-if BACKEND_STATIC.exists():
-    STATICFILES_DIRS.append(BACKEND_STATIC)
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, '..', 'frontend', 'dist'),
+]
+
 
 # Configure WhiteNoise for static files
 STORAGES = {
@@ -160,8 +122,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            os.path.join(BASE_DIR, '../frontend/dist'),
-            os.path.join(BASE_DIR, 'backend_core/Templates'),
+            os.path.join(BASE_DIR, '..', 'frontend', 'dist'),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -175,7 +136,7 @@ TEMPLATES = [
     },
 ]
 
-# DATABASE 
+# DATABASE
 if IS_TESTING:
     DATABASES = {
         "default": {
