@@ -388,3 +388,17 @@ class Notification(models.Model):
     
     def __str__(self):
         return f"Notification: {self.title} - {self.user.email}"
+
+class TeamMember(models.Model):
+    name = models.CharField(max_length=100)
+    role = models.CharField(max_length=100)
+    avatar = models.URLField(blank=True)
+    linkedin = models.URLField(blank=True)
+    image = models.ImageField(upload_to='team/', blank=True, null=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order', 'name']
+
+    def __str__(self):
+        return self.name

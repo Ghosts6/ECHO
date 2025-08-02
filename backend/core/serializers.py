@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password
 from .models import (
     User, Patient, HealthReport, MedicalRecord, 
-    Appointment, SymptomLog, Notification
+    Appointment, SymptomLog, Notification, TeamMember
 )
 
 
@@ -270,3 +270,8 @@ class MedicalRecordUploadSerializer(serializers.ModelSerializer):
         
         record = MedicalRecord.objects.create(patient=patient, **validated_data)
         return record 
+    
+class TeamMemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TeamMember
+        fields = ["id", "name", "role", "avatar", "linkedin", "image", "order"]

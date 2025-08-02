@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
 from .models import (
     User, Patient, HealthReport, MedicalRecord, 
-    Appointment, SymptomLog, Notification
+    Appointment, SymptomLog, Notification, TeamMember
 )
 
 
@@ -248,3 +248,8 @@ class NotificationAdmin(admin.ModelAdmin):
         updated = queryset.update(is_read=False)
         self.message_user(request, f'{updated} notifications marked as unread.')
     mark_as_unread.short_description = "Mark selected notifications as unread"
+
+@admin.register(TeamMember)
+class TeamMemberAdmin(admin.ModelAdmin):
+    list_display = ("name", "role", "order")
+    ordering = ("order", "name")
