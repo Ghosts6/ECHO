@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
-import NotFoundPage from "./pages/NotFoundPage";
-import Error500Page from "./pages/Error500Page";
 import RecordsPage from "./pages/RecordsPage";
 import AegisPage from "./pages/AegisPage";
 import LoginPage from "./pages/LoginPage";
@@ -11,6 +9,8 @@ import ForgotPage from "./pages/ForgotPage";
 import ResetPage from "./pages/ResetPage";
 import AccountPage from "./pages/AccountPage";
 import AboutPage from "./pages/AboutPage";
+import NotFound from "./pages/NotFound";
+import ServerError from "./pages/ServerError";
 import apiClient from "./api/client";
 
 function App() {
@@ -52,8 +52,8 @@ function App() {
           <Route path="/records" element={<RecordsPage />} />
           <Route path="/aegis" element={<AegisPage />} />
           <Route path="/about" element={<AboutPage />} /> 
-          <Route path="/500" element={<Error500Page />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/500" element={<ServerError />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </Router>
