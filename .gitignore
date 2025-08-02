@@ -9,6 +9,14 @@ venv/
 db.sqlite3
 staticfiles/
 
+# Django/React static build outputs
+backend_core/Static/frontend/static/
+backend_core/Static/frontend/*.js
+backend_core/Static/frontend/*.css
+backend_core/Static/frontend/*.map
+backend_core/Static/frontend/asset-manifest.json
+backend_core/Static/frontend/index.html
+
 # Node.js / React
 node_modules/
 build/
