@@ -26,12 +26,34 @@ TEST_MODE = os.getenv("TEST_MODE", "False").lower() == "true"
 IS_TESTING = TEST_MODE
 
 # CROSS config
-CORS_ORIGIN_ALLOW_ALL = True
+
+# CORS config
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
 CORS_ALLOW_CREDENTIALS = True
 
+# CSRF config
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+# CORS config
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 ]
 
 INSTALLED_APPS = [
@@ -51,6 +73,7 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
 }
@@ -188,6 +211,8 @@ PBKDF2_ITERATIONS = 600000  # Increased from default 60000
 
 # BCrypt Configuration
 BCRYPT_ROUNDS = 12  # Increased from default 10
+
+# Session Security
 
 # Session Security
 SESSION_COOKIE_SECURE = not DEBUG  # HTTPS only in production

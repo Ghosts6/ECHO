@@ -5,15 +5,19 @@ from django.views import View
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .serializers import TeamMemberSerializer, UserSerializer, UserLoginSerializer, PasswordResetSerializer, PasswordResetConfirmSerializer
+from .serializers import TeamMemberSerializer, UserSerializer, UserLoginSerializer, PasswordResetSerializer, PasswordResetConfirmSerializer, PatientSerializer
 from .models import TeamMember, User
 from django.utils import timezone
 from django.core.mail import send_mail
 from rest_framework import status
 from rest_framework.permissions import AllowAny
+from rest_framework.generics import RetrieveUpdateAPIView
 import uuid
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 # --- AUTH API VIEWS ---
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class SignupAPI(APIView):
     permission_classes = [AllowAny]
     def post(self, request):
@@ -25,6 +29,7 @@ class SignupAPI(APIView):
             return Response({'detail': 'Account created. Please verify your email.'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class LoginAPI(APIView):
     permission_classes = [AllowAny]
     def post(self, request):
@@ -37,6 +42,7 @@ class LoginAPI(APIView):
             return Response({'detail': 'Login successful', 'user': UserSerializer(user).data})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class ForgotPasswordAPI(APIView):
     permission_classes = [AllowAny]
     def post(self, request):
@@ -64,6 +70,7 @@ class ForgotPasswordAPI(APIView):
             return Response({'detail': 'If your email exists, a reset link has been sent.'})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class ResetPasswordAPI(APIView):
     permission_classes = [AllowAny]
     def post(self, request):
@@ -109,3 +116,17 @@ class TeamListAPI(APIView):
         serializer = TeamMemberSerializer(queryset, many=True, context={"request": request})
         return Response(serializer.data)
 
+class AccountAPI(RetrieveUpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user
+
+
+class PatientAPI(RetrieveUpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = PatientSerializer
+
+    def get_object(self):
+        return self.request.user.patient_profile
