@@ -48,8 +48,8 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center p-4 text-neutral">
         <div className="text-2xl font-bold">
           <Link to="/" className="flex items-center gap-2 text-accent hover:opacity-90 transition-opacity">
-            <img src={Logo} alt="Echo Logo" className="h-8 w-auto" />
-            Echo
+            <img src={Logo} alt="Echo Logo" className="h-8 w-auto rounded-full shadow-md" />
+            <span className="font-mono font-semibold tracking-tight text-lg">Echo</span>
           </Link>
         </div>
         <div className="hidden md:flex items-center gap-8">
