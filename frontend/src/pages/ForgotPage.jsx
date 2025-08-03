@@ -53,7 +53,7 @@ export default function ForgotPage() {
                   <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/><path d="M12 2v2m0 16v2m8-10h2m-18 0H2"/></svg>
                 </span>
                 <input
-                  className="w-full pl-10 mb-1 p-2 border rounded focus:ring-2 focus:ring-blue-200"
+                  className="w-full pl-10 mb-1 p-2 border rounded focus:ring-2 text-[#111111] focus:ring-blue-200"
                   type="email"
                   placeholder="Email"
                   value={email}

@@ -10,6 +10,9 @@ db.sqlite3
 staticfiles/
 backend/test_db.sqlite3
 
+# Media
+backend_core/Media/medical_records/test*
+
 # Django/React static build outputs
 backend_core/Static/frontend/static/
 backend_core/Static/frontend/*.js
