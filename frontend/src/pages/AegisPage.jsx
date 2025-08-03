@@ -1,4 +1,6 @@
+
 import React, { useState } from "react";
+import AegisLoader from "../components/AegisLoader";
 
 export default function AegisPage() {
     const [symptoms, setSymptoms] = useState("");
@@ -139,20 +141,20 @@ export default function AegisPage() {
                     ></textarea>
                 </div>
 
-                <button 
+                {isLoading ? (
+                  <div className="w-full flex flex-col items-center justify-center animate-fade-in">
+                    <AegisLoader />
+                  </div>
+                ) : (
+                  <button 
                     onClick={handleDiagnoseClick}
                     disabled={isButtonDisabled}
                     className={`fancy-button flex items-center justify-center w-full px-8 py-3 text-neutral font-bold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-neutral disabled:bg-opacity-50 ${isButtonDisabled ? "disabled:animate-pulse" : ""}`}
-                >
+                  >
                     <span id="button-text" className="flex items-center gap-2">
-                        {isLoading ? "Analyzing..." : "Get Diagnosis ✨"}
+                      Get Diagnosis ✨
                     </span>
-                </button>
-
-                {isLoading && (
-                    <div className="mt-8 text-lg font-semibold text-accent animate-pulse-thinking">
-                        Aegis is thinking...
-                    </div>
+                  </button>
                 )}
 
                 {diagnosis && (
