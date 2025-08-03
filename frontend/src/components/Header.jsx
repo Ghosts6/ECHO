@@ -47,9 +47,9 @@ const Header = () => {
     <header className="bg-primary shadow-lg sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center p-4 text-neutral">
         <div className="text-2xl font-bold">
-          <Link to="/" className="flex items-center gap-2 text-accent hover:opacity-90 transition-opacity">
-            <img src={Logo} alt="Echo Logo" className="h-8 w-auto rounded-full shadow-md" />
-            <span className="font-mono font-semibold tracking-tight text-lg">Echo</span>
+          <Link to="/" className="flex items-center gap-3 text-accent hover:opacity-90 transition-opacity">
+            <img src={Logo} alt="Echo Logo" className="h-9 w-9 object-contain rounded-lg shadow-sm" />
+            <span className="font-mono font-bold text-2xl tracking-tight">Echo</span>
           </Link>
         </div>
         <div className="hidden md:flex items-center gap-8">

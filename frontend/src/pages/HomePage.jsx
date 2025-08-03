@@ -35,7 +35,7 @@ const HomePage = () => {
   return (
     <div className="relative min-h-screen w-full text-neutral font-sans overflow-x-hidden">
       {/* Hero Section with full-screen background video and modern look */}
-      <section className="relative flex flex-col items-center justify-center min-h-screen w-full overflow-hidden">
+      <section className="relative flex flex-col items-center justify-center min-h-screen w-full overflow-hidden px-2 sm:px-4 md:px-8">
         {/* Background Video only for hero, with circular corners */}
         <video
           autoPlay
@@ -49,9 +49,9 @@ const HomePage = () => {
           Your browser does not support the video tag.
         </video>
         {/* Hero Content - minimal modern font, typewriter and fade-in animation */}
-        <div className="relative z-10 flex flex-col items-center justify-center w-full text-center px-4 pb-16 pt-24">
+        <div className="relative z-10 flex flex-col items-center justify-center w-full text-center px-2 sm:px-4 md:px-8 pb-16 pt-24">
           <h1
-            className={`typewriter${typed ? ' typed' : ''} overflow-hidden whitespace-nowrap text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-6 font-sans text-accent transition-all duration-700`}
+            className={`typewriter${typed ? ' typed' : ''} overflow-hidden whitespace-nowrap text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-6 font-sans text-accent transition-all duration-700`}
             style={{
               letterSpacing: '-0.04em',
               fontFamily:
@@ -62,7 +62,7 @@ const HomePage = () => {
             Welcome to Echo
           </h1>
           <p
-            className="fade-in-up text-xl sm:text-2xl md:text-3xl mb-10 font-medium text-white/90 font-sans transition-all duration-700"
+            className="fade-in-up text-base xs:text-lg sm:text-2xl md:text-3xl mb-10 font-medium text-white/90 font-sans transition-all duration-700"
             style={{
               fontFamily:
                 "'Inter', 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif",
@@ -72,7 +72,7 @@ const HomePage = () => {
           </p>
           <Link
             to="/aegis"
-            className="btn text-lg sm:text-xl px-8 py-4 rounded-full font-semibold shadow-xl bg-accent hover:bg-cyan-400 transition-all duration-300 border-2 border-white/20"
+            className="btn text-base xs:text-lg sm:text-xl px-6 xs:px-8 py-3 xs:py-4 rounded-full font-semibold shadow-xl bg-accent hover:bg-cyan-400 transition-all duration-300 border-2 border-white/20"
             style={{
               boxShadow: '0 4px 32px 0 rgba(0,220,255,0.15)',
               fontFamily:
@@ -84,7 +84,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Features Section: full width, solid background, no video behind */}
       <section className="w-full mt-32 fade-down flex justify-center">
         <div className="w-full max-w-7xl bg-primary bg-opacity-90 rounded-3xl shadow-lg p-8">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-12 text-accent font-sans tracking-tight">
@@ -97,24 +96,20 @@ const HomePage = () => {
                 className="flip-card w-full h-64 group"
               >
                 <div className="flip-card-inner w-full h-full">
-                  {/* Front Side */}
                   <div className="flip-card-front bg-secondary bg-opacity-10 backdrop-blur-md p-8 rounded-lg shadow-lg flex flex-col justify-center items-center h-full font-sans relative overflow-hidden border border-solid border-accent/20">
-                    {/* Light effect on hover */}
                     <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute -top-1/4 left-1/2 w-2/3 h-1/2 bg-gradient-to-br from-cyan-200/40 to-transparent rounded-full blur-2xl -translate-x-1/2" />
                     </div>
                     {feature.icon}
-                    <h3 className="text-2xl font-bold mb-2 font-sans">
+                    <h3 className="text-2xl font-bold mb-2 font-sans transition-opacity duration-300 group-hover:opacity-0">
                       {feature.title}
                     </h3>
                   </div>
-                  {/* Back Side */}
                   <div className="flip-card-back bg-secondary bg-opacity-10 backdrop-blur-md p-8 rounded-lg shadow-lg flex flex-col justify-center items-center h-full font-sans relative overflow-hidden border border-solid border-accent/20">
-                    {/* Light effect on hover */}
                     <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute -top-1/4 left-1/2 w-2/3 h-1/2 bg-gradient-to-br from-cyan-200/40 to-transparent rounded-full blur-2xl -translate-x-1/2" />
                     </div>
-                    <p className="text-base">{feature.description}</p>
+                    <p className="text-base mt-[5rem]">{feature.description}</p>
                   </div>
                 </div>
               </div>

@@ -116,6 +116,7 @@ class TeamListAPI(APIView):
         serializer = TeamMemberSerializer(queryset, many=True, context={"request": request})
         return Response(serializer.data)
 
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class AccountAPI(RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = UserSerializer
@@ -124,6 +125,7 @@ class AccountAPI(RetrieveUpdateAPIView):
         return self.request.user
 
 
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class PatientAPI(RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = PatientSerializer

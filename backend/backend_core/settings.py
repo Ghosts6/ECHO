@@ -215,16 +215,20 @@ BCRYPT_ROUNDS = 12  # Increased from default 10
 # Session Security
 
 # Session Security
-SESSION_COOKIE_SECURE = not DEBUG  # HTTPS only in production
+if DEBUG:
+    SESSION_COOKIE_SECURE = False
+    SESSION_COOKIE_SAMESITE = 'Lax'
+    CSRF_COOKIE_SECURE = False
+    CSRF_COOKIE_SAMESITE = 'Lax'
+else:
+    SESSION_COOKIE_SECURE = True  # Required for SameSite=None cookies to be accepted by browsers
+    SESSION_COOKIE_SAMESITE = 'None'
+    CSRF_COOKIE_SECURE = True  # Required for SameSite=None cookies to be accepted by browsers
+    CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SAMESITE = 'Lax'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 3600  # 1 hour
-
-# CSRF Protection
-CSRF_COOKIE_SECURE = not DEBUG
-CSRF_COOKIE_HTTPONLY = True
-CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_HTTPONLY = False
 
 # Security Headers
 SECURE_BROWSER_XSS_FILTER = True
