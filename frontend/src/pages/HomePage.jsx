@@ -94,12 +94,11 @@ const HomePage = () => {
             {features.map((feature, idx) => (
               <div
                 key={idx}
-                className="flip-card w-full group"
-                style={{ perspective: '1000px' }}
+                className="flip-card w-full h-64 group"
               >
-                <div className="flip-card-inner group-hover:shadow-[0_0_40px_10px_rgba(0,220,255,0.15)] transition-shadow duration-300">
+                <div className="flip-card-inner w-full h-full">
                   {/* Front Side */}
-                  <div className="flip-card-front bg-secondary bg-opacity-80 backdrop-blur-md p-8 rounded-lg shadow-lg flex flex-col justify-center items-center h-full font-sans relative overflow-hidden">
+                  <div className="flip-card-front bg-secondary bg-opacity-10 backdrop-blur-md p-8 rounded-lg shadow-lg flex flex-col justify-center items-center h-full font-sans relative overflow-hidden border border-solid border-accent/20">
                     {/* Light effect on hover */}
                     <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute -top-1/4 left-1/2 w-2/3 h-1/2 bg-gradient-to-br from-cyan-200/40 to-transparent rounded-full blur-2xl -translate-x-1/2" />
@@ -110,7 +109,7 @@ const HomePage = () => {
                     </h3>
                   </div>
                   {/* Back Side */}
-                  <div className="flip-card-back bg-secondary bg-opacity-80 backdrop-blur-md p-8 rounded-lg shadow-lg flex flex-col justify-center items-center h-full font-sans relative overflow-hidden">
+                  <div className="flip-card-back bg-secondary bg-opacity-10 backdrop-blur-md p-8 rounded-lg shadow-lg flex flex-col justify-center items-center h-full font-sans relative overflow-hidden border border-solid border-accent/20">
                     {/* Light effect on hover */}
                     <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute -top-1/4 left-1/2 w-2/3 h-1/2 bg-gradient-to-br from-cyan-200/40 to-transparent rounded-full blur-2xl -translate-x-1/2" />
